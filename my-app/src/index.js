@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
-// remember to fill in X with this.state
+// remembers to fill in X with this.state
   constructor(props) {
     super(props);
     this.state = {
@@ -11,13 +11,13 @@ class Square extends React.Component {
     };
   }
 
-
     render() {
       return (
  //added click function       
-        <button className="square" onClick={() =>
-  console.log('click')}>
-          {this.props.value}
+        <button 
+          className="square" 
+          onClick={() => this.setState({value: 'X'})}>
+          {this.state.value}
         </button>
       );
     }
@@ -25,9 +25,18 @@ class Square extends React.Component {
 
   
   class Board extends React.Component {
+// Board tells each Square what to display by passing a prop
+// this keeps the children (Squares) in sync with each other    
+    constructor(props) {
+      super(props);
+      this.state = {
+        squares: Array(9).fill(null),
+      };
+    }
+
     renderSquare(i) {
-      // value={i}
-      return <Square value={i} />; 
+      // instruct each Square about its current value
+      return <Square value={this.state.squares[i]} />; 
     }
   
     render() {
